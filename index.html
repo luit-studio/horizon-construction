@@ -8,14 +8,14 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.01em; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.01em; overflow-x: hidden; }
         .project-card:hover img { transform: scale(1.05); }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-slate-900" x-data="{ mobileMenu: false }">
 
-    <nav class="flex justify-between items-center px-12 py-6 max-w-[1440px] mx-auto">
-        <div class="flex items-center space-x-12">
+    <nav class="flex justify-between items-center px-6 md:px-12 py-6 max-w-[1440px] mx-auto relative z-50">
+        <div class="flex items-center md:space-x-12">
             <div class="font-bold text-lg tracking-tighter uppercase leading-tight">Horizon<br>Construct</div>
             <div class="hidden lg:flex space-x-8 text-[13px] font-medium text-gray-500">
                 <a href="#" class="hover:text-black transition">Projects</a>
@@ -25,218 +25,198 @@
                 <a href="#" class="hover:text-black transition">Sustainability</a>
             </div>
         </div>
-        <button class="bg-black text-white px-6 py-2.5 rounded-lg text-[13px] font-medium hover:bg-slate-800 transition shadow-lg">
-            Request a Quote
-        </button>
+        
+        <div class="flex items-center space-x-4">
+            <a href="#contact">
+            <button class="hidden sm:block bg-black text-white px-6 py-2.5 rounded-lg text-[13px] font-medium hover:bg-slate-800 transition shadow-lg">
+                Request a Quote
+            </button>
+            </a>
+            <a href="#contact">
+
+            <button @click="mobileMenu = !mobileMenu" class="lg:hidden p-2 text-black focus:outline-none">
+                <svg x-show="!mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg x-show="mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            </a>
+        </div>
+
+        <div x-show="mobileMenu" x-transition class="fixed inset-0 bg-white z-40 flex flex-col p-8 lg:hidden pt-24 space-y-6 text-xl font-medium">
+            <a href="#" @click="mobileMenu = false">Projects</a>
+            <a href="#" @click="mobileMenu = false">Pre-Construction</a>
+            <a href="#" @click="mobileMenu = false">Expertise</a>
+            <a href="#" @click="mobileMenu = false">Safety</a>
+            <a href="#" @click="mobileMenu = false">Sustainability</a>
+            <hr>
+            <button class="bg-black text-white px-6 py-4 rounded-xl text-sm font-medium">Request a Quote</button>
+        </div>
     </nav>
 
-    <header class="max-w-[1440px] mx-auto px-12 pt-16">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-            <h1 class="text-6xl md:text-7xl font-medium max-w-3xl leading-[1.1]">
-                Engineering spaces<br>that define eras
+    <header class="max-w-[1440px] mx-auto px-6 md:px-12 pt-8 md:pt-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-6 md:space-y-0">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-medium max-w-3xl leading-[1.1]">
+                Engineering spaces<br class="hidden md:block"> that define eras
             </h1>
-            <p class="text-gray-400 text-sm max-w-xs mb-4">
+            <p class="text-gray-400 text-sm max-w-xs">
                 From industrial hubs to luxury skyscrapers, we deliver turnkey solutions with surgical precision and sustainable materials.
             </p>
         </div>
         
-        <div class="relative rounded-[32px] overflow-hidden mb-8 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Major Project Site" class="w-full h-[650px] object-cover">
-            <div class="absolute bottom-10 left-10 bg-white/90 backdrop-blur-md p-6 rounded-2xl flex items-center space-x-4 border border-white/20">
-                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white">▶</div>
+        <div class="relative rounded-[24px] md:rounded-[32px] overflow-hidden mb-8 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop" alt="Major Project Site" class="w-full h-[400px] md:h-[650px] object-cover">
+            <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-white/90 backdrop-blur-md p-4 md:p-6 rounded-2xl flex items-center space-x-4 border border-white/20 mr-6">
+                <div class="w-10 h-10 md:w-12 h-12 bg-black rounded-full flex items-center justify-center text-white flex-shrink-0">▶</div>
                 <div>
-                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Ongoing Project</p>
-                    <p class="font-bold">Neo-Berlin Commercial Hub</p>
+                    <p class="text-[8px] md:text-[10px] uppercase font-bold text-gray-400 tracking-widest">Ongoing Project</p>
+                    <p class="font-bold text-xs md:text-base">Neo-Berlin Commercial Hub</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- <section class="max-w-[1440px] mx-auto px-12 py-20" x-data="{ tab: 'commercial' }">
-        <div class="mb-10">
-            <h2 class="text-4xl font-medium mb-4">Explore our diverse<br>portfolio of excellence</h2>
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-5 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div class="grid grid-cols-2 gap-4 order-2 lg:order-1">
+            <img src="https://i.pinimg.com/1200x/c7/98/6e/c7986ebc60b18985dcd55dd5cca89930.jpg" class="rounded-3xl h-48 md:h-80 w-full object-cover mt-6 md:mt-12" alt="Architectural detail">
+            <img src="https://i.pinimg.com/1200x/f2/eb/a6/f2eba6ce3722f7767315722f7295ef0a.jpg" class="rounded-3xl h-48 md:h-80 w-full object-cover" alt="Steel work">
         </div>
-
-        <div class="bg-gray-50 p-2 rounded-2xl inline-flex mb-8">
-            <button @click="tab = 'commercial'" :class="tab === 'commercial' ? 'bg-white shadow-sm text-black' : 'text-gray-400'" class="px-6 py-2 rounded-xl text-sm font-medium transition">Commercial</button>
-            <button @click="tab = 'industrial'" :class="tab === 'industrial' ? 'bg-white shadow-sm text-black' : 'text-gray-400'" class="px-6 py-2 rounded-xl text-sm font-medium transition">Industrial</button>
-            <button @click="tab = 'residential'" :class="tab === 'residential' ? 'bg-white shadow-sm text-black' : 'text-gray-400'" class="px-6 py-2 rounded-xl text-sm font-medium transition">Luxury Residential</button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center bg-white border border-gray-100 p-6 rounded-[24px] shadow-sm">
-            <div class="md:col-span-1 border-r border-gray-100 px-4">
-                <label class="text-[10px] uppercase text-gray-400 font-bold block mb-1">Region</label>
-                <select class="bg-transparent w-full font-medium text-sm focus:outline-none"><option>Global Operations</option></select>
-            </div>
-            <div class="md:col-span-1 border-r border-gray-100 px-4">
-                <label class="text-[10px] uppercase text-gray-400 font-bold block mb-1">Service Type</label>
-                <select class="bg-transparent w-full font-medium text-sm focus:outline-none"><option>General Contracting</option></select>
-            </div>
-            <div class="md:col-span-1 border-r border-gray-100 px-4">
-                <label class="text-[10px] uppercase text-gray-400 font-bold block mb-1">Project Scale</label>
-                <select class="bg-transparent w-full font-medium text-sm focus:outline-none"><option>$10M – $500M+</option></select>
-            </div>
-            <div class="md:col-span-1 px-4">
-                <label class="text-[10px] uppercase text-gray-400 font-bold block mb-1">Timeline</label>
-                <select class="bg-transparent w-full font-medium text-sm focus:outline-none"><option>Q1 2026 - Q4 2028</option></select>
-            </div>
-            <div class="flex justify-end space-x-4">
-                <button class="bg-black text-white px-8 py-3 rounded-xl text-sm font-semibold hover:bg-slate-800 transition">View Portfolio</button>
-            </div>
-        </div>
-    </section> -->
-
-    
-
-    
-    
-
-    <section class="max-w-[1440px] mx-auto px-12 pt-20 pb-5 grid lg:grid-cols-2 gap-24 items-center">
-        <div class="grid grid-cols-2 gap-4">
-            <img src="https://i.pinimg.com/1200x/c7/98/6e/c7986ebc60b18985dcd55dd5cca89930.jpg" class="rounded-3xl h-80 w-full object-cover mt-12" alt="Architectural detail">
-            <img src="https://i.pinimg.com/1200x/f2/eb/a6/f2eba6ce3722f7767315722f7295ef0a.jpg" class="rounded-3xl h-80 w-full object-cover" alt="Steel work">
-        </div>
-        <div class="space-y-8">
-            <span class="text-xl font-bold uppercase tracking-widest text-gray-400">About Horizon Construction</span>
-            <h2 class="text-5xl font-medium leading-tight">Building Legacy<br>Through Resilience</h2>
-            <p class="text-gray-500 leading-relaxed">Founded on the principles of structural integrity and architectural innovation, Horizon Construct has evolved into a global leader in infrastructure. We don't just build structures; we create the backbone of modern civilization.</p>
-            <div class="flex space-x-12">
+        <div class="space-y-6 md:space-y-8 order-1 lg:order-2">
+            <span class="text-sm md:text-xl font-bold uppercase tracking-widest text-gray-400">About Horizon Construction</span>
+            <h2 class="text-3xl md:text-5xl font-medium leading-tight">Building Legacy<br>Through Resilience</h2>
+            <p class="text-gray-500 leading-relaxed text-sm md:text-base">Founded on the principles of structural integrity and architectural innovation, Horizon Construct has evolved into a global leader in infrastructure. We don't just build structures; we create the backbone of modern civilization.</p>
+            <div class="flex space-x-8 md:space-x-12">
                 <div>
-                    <p class="text-2xl font-bold">100%</p>
-                    <p class="text-gray-400 text-[10px] uppercase font-bold tracking-widest">Sustainability Rate</p>
+                    <p class="text-xl md:text-2xl font-bold">100%</p>
+                    <p class="text-gray-400 text-[8px] md:text-[10px] uppercase font-bold tracking-widest">Sustainability Rate</p>
                 </div>
                 <div>
-                    <p class="text-2xl font-bold">Glo-Ex</p>
-                    <p class="text-gray-400 text-[10px] uppercase font-bold tracking-widest">Global Excellence Award</p>
+                    <p class="text-xl md:text-2xl font-bold">Glo-Ex</p>
+                    <p class="text-gray-400 text-[8px] md:text-[10px] uppercase font-bold tracking-widest">Global Excellence</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="max-w-[1440px] mx-auto px-12 bg-white">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 border-y border-gray-100 py-10">
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 bg-white">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-y border-gray-100 py-10">
             <div class="text-center">
-                <h2 class="text-6xl font-bold mb-2">25+</h2>
-                <p class="text-gray-400 text-xs uppercase tracking-widest font-bold">Years Experience</p>
+                <h2 class="text-3xl md:text-6xl font-bold mb-2">25+</h2>
+                <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-widest font-bold">Years Experience</p>
             </div>
             <div class="text-center">
-                <h2 class="text-6xl font-bold mb-2">480+</h2>
-                <p class="text-gray-400 text-xs uppercase tracking-widest font-bold">Projects Built</p>
+                <h2 class="text-3xl md:text-6xl font-bold mb-2">480+</h2>
+                <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-widest font-bold">Projects Built</p>
             </div>
             <div class="text-center">
-                <h2 class="text-6xl font-bold mb-2">12M</h2>
-                <p class="text-gray-400 text-xs uppercase tracking-widest font-bold">Sq. Ft Delivered</p>
+                <h2 class="text-3xl md:text-6xl font-bold mb-2">12M</h2>
+                <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-widest font-bold">Sq. Ft Delivered</p>
             </div>
             <div class="text-center">
-                <h2 class="text-6xl font-bold mb-2">0</h2>
-                <p class="text-gray-400 text-xs uppercase tracking-widest font-bold">Safety Incidents</p>
+                <h2 class="text-3xl md:text-6xl font-bold mb-2">0</h2>
+                <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-widest font-bold">Safety Incidents</p>
             </div>
         </div>
     </section>
 
-    <section class="max-w-[1440px] mx-auto px-12  bg-gray-50 rounded-[48px] my-12">
-        <div class="flex flex-col md:flex-row justify-between items-start mb-20">
-            <h2 class="text-5xl font-medium leading-tight">Our Workflow<br>for certainty.</h2>
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 bg-gray-50 rounded-[32px] md:rounded-[48px] my-12 py-12 md:py-20">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-20">
+            <h2 class="text-3xl md:text-5xl font-medium leading-tight">Our Workflow<br>for certainty.</h2>
             <p class="text-gray-400 text-sm max-w-xs mt-6">A rigorous, data-driven approach from initial blueprint to final inspection.</p>
         </div>
-        <div class="grid md:grid-cols-4 gap-8">
-            <div class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="space-y-4 md:space-y-6">
                 <div class="w-12 h-12 bg-black text-white flex items-center justify-center rounded-xl font-bold">01</div>
-                <h4 class="text-xl font-bold">Consultation</h4>
+                <h4 class="text-lg md:text-xl font-bold">Consultation</h4>
                 <p class="text-gray-500 text-sm leading-relaxed">Feasibility studies, site assessments, and initial budgeting to align with your vision.</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-4 md:space-y-6">
                 <div class="w-12 h-12 bg-white border border-gray-200 flex items-center justify-center rounded-xl font-bold">02</div>
-                <h4 class="text-xl font-bold">BIM Modeling</h4>
+                <h4 class="text-lg md:text-xl font-bold">BIM Modeling</h4>
                 <p class="text-gray-500 text-sm leading-relaxed">Advanced 4D Virtual Design and Construction to detect clashes before ground-breaking.</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-4 md:space-y-6">
                 <div class="w-12 h-12 bg-white border border-gray-200 flex items-center justify-center rounded-xl font-bold">03</div>
-                <h4 class="text-xl font-bold">Construction</h4>
+                <h4 class="text-lg md:text-xl font-bold">Construction</h4>
                 <p class="text-gray-500 text-sm leading-relaxed">Execution with precision crews, real-time tracking, and stringent safety protocols.</p>
             </div>
-            <div class="space-y-6">
+            <div class="space-y-4 md:space-y-6">
                 <div class="w-12 h-12 bg-white border border-gray-200 flex items-center justify-center rounded-xl font-bold">04</div>
-                <h4 class="text-xl font-bold">Handover</h4>
+                <h4 class="text-lg md:text-xl font-bold">Handover</h4>
                 <p class="text-gray-500 text-sm leading-relaxed">Final commissioning, lifecycle documentation, and post-occupancy support.</p>
             </div>
         </div>
     </section>
 
-    <section class="max-w-[1440px] mx-auto px-12 pb-24" x-data="{ 
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 pb-24" x-data="{ 
         projects: [
-            {name: 'Vertex Plaza', type: 'Office/Retail', status: 'Completed', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1175&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', area: '45,000 m²', tech: 'Smart Glass', crews: '24/7', safety: 'Zero Incidents'},
+            {name: 'Vertex Plaza', type: 'Office/Retail', status: 'Completed', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1175', area: '45,000 m²', tech: 'Smart Glass', crews: '24/7', safety: 'Zero Incidents'},
             {name: 'Hydra Water Plant', type: 'Industrial', status: 'Active', img: 'https://images.unsplash.com/photo-1513828583688-c52646db42da', area: '120,000 m²', tech: 'LEED Gold', crews: 'High-Scale', safety: 'ISO 45001'},
-            {name: 'The Glass Pavilion', type: 'Hospitality', status: 'Phase II', img: 'https://images.unsplash.com/photo-1657502868012-ae720cf8fedc?q=80&w=1272&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', area: '12,000 m²', tech: 'Modular Build', crews: 'Design-Build', safety: 'Top Rated'},
+            {name: 'The Glass Pavilion', type: 'Hospitality', status: 'Phase II', img: 'https://images.unsplash.com/photo-1657502868012-ae720cf8fedc?q=80&w=1272', area: '12,000 m²', tech: 'Modular Build', crews: 'Design-Build', safety: 'Top Rated'},
             {name: 'Canyon Data Center', type: 'Infrastructure', status: 'Planning', img: 'https://i.pinimg.com/1200x/0a/f7/70/0af77071bf14db6c8e3ba2e7ece04445.jpg', area: '80,000 m²', tech: 'Liquid Cooling', crews: 'Expert Tech', safety: 'Restricted'},
             {name: 'Summit Sky-Lofts', type: 'Luxury Living', status: 'Topping Out', img: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8', area: '32,000 m²', tech: 'Carbon Negative', crews: 'Artisan', safety: 'Secure'},
             {name: 'Nexus Bridge', type: 'Public Works', status: 'Active', img: 'https://i.pinimg.com/1200x/07/f7/fe/07f7fe90ef6356c5407100c0201eddf6.jpg', area: '2.4 KM', tech: 'Steel Truss', crews: 'Public Safety', safety: 'OSHA VPP'}
         ] 
     }">
-        <h3 class="text-xl font-bold mb-10 border-l-4 border-black pl-4 uppercase tracking-tighter">Current Engagements</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-y-16 gap-x-8">
+        <h3 class="text-lg md:text-xl font-bold mb-10 border-l-4 border-black pl-4 uppercase tracking-tighter">Current Engagements</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 md:gap-y-16 gap-x-8">
             <template x-for="project in projects" :key="project.name">
                 <div class="project-card cursor-pointer group">
-                    <div class="overflow-hidden rounded-2xl mb-4 h-[350px] bg-slate-100 relative">
+                    <div class="overflow-hidden rounded-2xl mb-4 h-[300px] md:h-[350px] bg-slate-100 relative">
                         <img :src="project.img" :alt="project.name" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
                         <span class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase" x-text="project.status"></span>
                     </div>
                     <div class="flex justify-between items-start mb-1">
-                        <h4 class="font-bold text-lg" x-text="project.name"></h4>
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest" x-text="project.type"></span>
+                        <h4 class="font-bold text-base md:text-lg" x-text="project.name"></h4>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" x-text="project.type"></span>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 mt-4 text-[11px] text-gray-500 font-medium">
-                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">🏗️ <span class="ml-2" x-text="project.area"></span></div>
-                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">🔋 <span class="ml-2" x-text="project.tech"></span></div>
-                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">👷 <span class="ml-2" x-text="project.crews"></span></div>
-                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">🛡️ <span class="ml-2" x-text="project.safety"></span></div>
+                    <div class="grid grid-cols-2 gap-2 mt-4 text-[10px] md:text-[11px] text-gray-500 font-medium">
+                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">🏗️ <span class="ml-2 truncate" x-text="project.area"></span></div>
+                        <div class="flex items-center bg-gray-50 p-2 rounded-lg">🔋 <span class="ml-2 truncate" x-text="project.tech"></span></div>
                     </div>
                 </div>
             </template>
         </div>
     </section>
 
-    <section class="max-w-[1440px] mx-auto px-12 py-24 border-t border-gray-100 grid md:grid-cols-2 gap-24 items-center">
-        <div>
-            <h2 class="text-5xl font-medium mb-12 leading-tight">Precision at every<br>poured foundation.</h2>
-            <div class="bg-slate-900 text-white p-12 rounded-[40px]">
-                <h4 class="text-2xl font-bold mb-4 italic">The Horizon<br>Methodology</h4>
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 pb-24 grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+        <div class="order-2 md:order-1">
+            <h2 class="text-3xl md:text-5xl font-medium mb-8 md:mb-12 leading-tight">Precision at every<br>poured foundation.</h2>
+            <div class="bg-slate-900 text-white p-8 md:p-12 rounded-[32px] md:rounded-[40px]">
+                <h4 class="text-xl md:text-2xl font-bold mb-4 italic">The Horizon Methodology</h4>
                 <p class="text-slate-400 text-sm mb-8 leading-relaxed">We combine 4D BIM modeling with lean construction principles to eliminate waste, ensure on-time delivery, and guarantee structural integrity that lasts a century.</p>
                 <button class="bg-white text-black px-8 py-3 rounded-xl text-xs font-bold hover:bg-gray-200 transition">Our Core Values</button>
             </div>
         </div>
-        <div class="rounded-[40px] overflow-hidden shadow-2xl rotate-1">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2000&auto=format&fit=crop" alt="The Construction Process" class="w-full h-[650px] object-cover">
+        <div class="rounded-[32px] md:rounded-[40px] overflow-hidden shadow-2xl rotate-1 order-1 md:order-2">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2000&auto=format&fit=crop" alt="The Construction Process" class="w-full h-[350px] md:h-[650px] object-cover">
         </div>
     </section>
 
-    <section class="max-w-[1440px] mx-auto px-12 py-32 bg-white" id="contact">
-        <div class="grid lg:grid-cols-2 gap-24">
+    <section class="max-w-[1440px] mx-auto px-6 md:px-12 py-12 md:py-32 bg-white" id="contact">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-24">
             <div>
-                <h2 class="text-5xl font-medium leading-tight mb-8">Ready to build your<br>next landmark?</h2>
-                <p class="text-gray-500 mb-12 max-w-sm">Contact our engineering team to discuss your project requirements, timelines, and custom solutions.</p>
+                <h2 class="text-3xl md:text-5xl font-medium leading-tight mb-8">Ready to build your<br>next landmark?</h2>
+                <p class="text-gray-500 mb-8 md:mb-12 max-w-sm">Contact our engineering team to discuss your project requirements, timelines, and custom solutions.</p>
                 
-                <div class="space-y-8">
-                    <div class="flex items-center space-x-6">
-                        <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-xl">📍</div>
+                <div class="space-y-6 md:space-y-8">
+                    <div class="flex items-center space-x-4 md:space-x-6">
+                        <div class="w-10 h-10 md:w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-lg md:text-xl">📍</div>
                         <div>
-                            <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Global HQ</p>
-                            <p class="font-bold text-sm">88 Construction Way, New York, NY</p>
+                            <p class="text-[8px] md:text-[10px] uppercase font-bold text-gray-400 tracking-widest">Global HQ</p>
+                            <p class="font-bold text-xs md:text-sm">88 Construction Way, New York, NY</p>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-6">
-                        <div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-xl">📞</div>
+                    <div class="flex items-center space-x-4 md:space-x-6">
+                        <div class="w-10 h-10 md:w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-lg md:text-xl">📞</div>
                         <div>
-                            <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Direct Line</p>
-                            <p class="font-bold text-sm">+1 (555) 902-3000</p>
+                            <p class="text-[8px] md:text-[10px] uppercase font-bold text-gray-400 tracking-widest">Direct Line</p>
+                            <p class="font-bold text-xs md:text-sm">+1 (555) 902-3000</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <form class="bg-gray-50 p-10 md:p-12 rounded-[40px] space-y-6">
-                <div class="grid md:grid-cols-2 gap-6">
+            <form id="contact" class="bg-gray-50 p-6 md:p-12 rounded-[32px] md:rounded-[40px] space-y-6">
+                <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div class="space-y-2">
                         <label class="text-[10px] uppercase font-bold text-gray-400 ml-2">Full Name</label>
                         <input type="text" placeholder="John Doe" class="w-full bg-white border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-black outline-none transition">
@@ -259,32 +239,32 @@
                     <label class="text-[10px] uppercase font-bold text-gray-400 ml-2">Message</label>
                     <textarea rows="4" placeholder="Tell us about your project..." class="w-full bg-white border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-black outline-none transition resize-none"></textarea>
                 </div>
-                <button class="w-full bg-black text-white font-bold py-5 rounded-2xl hover:bg-gray-800 transition shadow-xl shadow-black/10">
+                <button class="w-full bg-black text-white font-bold py-4 md:py-5 rounded-2xl hover:bg-gray-800 transition shadow-xl shadow-black/10">
                     Send Inquiry
                 </button>
             </form>
         </div>
     </section>
 
-    <a href="https://wa.me/message/7LZKJVZXA4Y6C1" target="_blank" class="fixed bottom-10 right-10 z-50 group">
-        <div class="absolute -top-12 right-0 bg-white text-black text-[10px] font-bold px-4 py-2 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-100 uppercase tracking-widest">
+    <a href="https://wa.me/message/7LZKJVZXA4Y6C1" target="_blank" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 group">
+        <div class="absolute -top-12 right-0 bg-white text-black text-[10px] font-bold px-4 py-2 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-100 uppercase tracking-widest hidden md:block">
             Chat with an Expert
         </div>
-        <div class="bg-black w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300">
-            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <div class="bg-black w-14 h-14 md:w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300">
+            <svg class="w-6 h-6 md:w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
             </svg>
         </div>
     </a>
 
-    <footer class="bg-black text-white pt-32 pb-12 overflow-hidden">
-        <div class="max-w-[1440px] mx-auto px-12">
-            <div class="flex flex-col md:flex-row justify-between mb-24">
+    <footer class="bg-black text-white pt-20 pb-12 overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between mb-16 md:mb-24">
                 <div class="mb-12 md:mb-0">
-                    <div class="text-3xl font-bold tracking-tighter uppercase leading-none mb-8">Horizon<br>Construct</div>
+                    <div class="text-2xl md:text-3xl font-bold tracking-tighter uppercase leading-none mb-6 md:mb-8">Horizon<br>Construct</div>
                     <p class="text-gray-500 max-w-xs text-sm">Building infrastructure with precision and integrity. Your partner in vertical and industrial expansion.</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-20">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-20">
                     <div>
                         <h5 class="text-xs font-bold uppercase tracking-widest mb-6">Explore</h5>
                         <ul class="space-y-4 text-gray-400 text-sm">
@@ -297,11 +277,10 @@
                         <h5 class="text-xs font-bold uppercase tracking-widest mb-6">Legal</h5>
                         <ul class="space-y-4 text-gray-400 text-sm">
                             <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                            <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
                             <li><a href="#" class="hover:text-white transition">Compliance</a></li>
                         </ul>
                     </div>
-                    <div class="col-span-2 md:col-span-1">
+                    <div class="col-span-2 lg:col-span-1">
                         <h5 class="text-xs font-bold uppercase tracking-widest mb-6">Contact</h5>
                         <p class="text-gray-400 text-sm mb-2">hq@horizonconstruct.com</p>
                         <p class="text-gray-400 text-sm">+1 (555) 902-3000</p>
@@ -309,11 +288,11 @@
                 </div>
             </div>
             
-            <h2 class="text-[18vw] font-bold tracking-tighter leading-none text-white/5 select-none pointer-events-none mb-12">HORIZON</h2>
+            <h2 class="text-[20vw] font-bold tracking-tighter leading-none text-white/5 select-none pointer-events-none mb-12">HORIZON</h2>
             
-            <div class="border-t border-gray-800 pt-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-[10px] font-bold uppercase tracking-widest">
+            <div class="border-t border-gray-800 pt-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-[10px] font-bold uppercase tracking-widest space-y-6 md:space-y-0 text-center">
                 <p>© 2026 Horizon Construct. All Rights Reserved.</p>
-                <div class="flex space-x-8 mt-6 md:mt-0">
+                <div class="flex space-x-8">
                     <a href="#">LinkedIn</a>
                     <a href="#">Instagram</a>
                     <a href="#">Behance</a>
